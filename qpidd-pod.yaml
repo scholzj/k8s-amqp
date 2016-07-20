@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: qpidd
+  labels:
+    name: qpidd
+spec:
+  securityContext:
+    fsGroup: 996
+    #runAsUser: 997
+  containers:
+    - image: scholzj/qpid-cpp:1.35.0-alpha
+      name: qpidd
+      env:
+        - name:  QPIDD_ADMIN_USERNAME
+          value: admin
+        - name:  QPIDD_ADMIN_PASSWORD
+          value: "123456"
+      ports:
+        - containerPort: 5672
+          name: amqp
+        - containerPort: 5671
+          name: amqps
+      volumeMounts:
+        - name: qpid-persistent-storage
+          mountPath: /var/lib/qpidd
+    - image: scholzj/qpid-cpp-gui:latest
+      args: ["-a", "admin/123456@qpidd:5672"]
+      name: qpidd-gui
+      env:
+        - name:  QMF_GUI_ADMIN_USERNAME
+          value: admin
+        - name:  QMF_GUI_ADMIN_PASSWORD
+          value: "123456"
+      ports:
+        - containerPort: 8080
+          name: http
+  volumes:
+    - name: qpid-persistent-storage
+#      hostPath:
+#        path: /tmp/qpid-persistent-storage
