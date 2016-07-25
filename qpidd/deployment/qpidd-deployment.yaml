@@ -1,0 +1,47 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: qpidd-deployment
+  labels:
+    app: amqp
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: qpidd
+      labels:
+        name: qpidd
+    spec:
+      securityContext:
+        fsGroup: 996
+      containers:
+        - image: scholzj/qpid-cpp:1.35.0-alpha
+          name: qpidd
+          imagePullPolicy: Always
+          env:
+            - name:  QPIDD_ADMIN_USERNAME
+              value: admin
+            - name:  QPIDD_ADMIN_PASSWORD
+              value: "123456"
+          ports:
+            - containerPort: 5672
+              name: amqp
+            - containerPort: 5671
+              name: amqps
+          volumeMounts:
+            - name: qpid-persistent-storage
+              mountPath: /var/lib/qpidd
+        - image: scholzj/qpid-cpp-gui:latest
+          name: qpidd-gui
+          imagePullPolicy: Always
+          args: ["-a", "admin/123456@qpidd:5672"]
+          env:
+            - name:  QMF_GUI_ADMIN_USERNAME
+              value: admin
+            - name:  QMF_GUI_ADMIN_PASSWORD
+              value: "123456"
+          ports:
+            - containerPort: 8080
+              name: http
+      volumes:
+        - name: qpid-persistent-storage
