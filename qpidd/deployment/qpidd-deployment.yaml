@@ -31,6 +31,13 @@ spec:
           volumeMounts:
             - name: qpid-persistent-storage
               mountPath: /var/lib/qpidd
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 256Mi
         - image: scholzj/qpid-cpp-gui:latest
           name: qpidd-gui
           imagePullPolicy: Always
@@ -43,5 +50,12 @@ spec:
           ports:
             - containerPort: 8080
               name: http
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 256Mi
       volumes:
         - name: qpid-persistent-storage
