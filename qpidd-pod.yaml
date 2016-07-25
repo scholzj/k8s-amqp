@@ -11,6 +11,7 @@ spec:
   containers:
     - image: scholzj/qpid-cpp:1.35.0-alpha
       name: qpidd
+      imagePullPolicy: Always
       env:
         - name:  QPIDD_ADMIN_USERNAME
           value: admin
@@ -25,8 +26,9 @@ spec:
         - name: qpid-persistent-storage
           mountPath: /var/lib/qpidd
     - image: scholzj/qpid-cpp-gui:latest
-      args: ["-a", "admin/123456@qpidd:5672"]
       name: qpidd-gui
+      imagePullPolicy: Always
+      args: ["-a", "admin/123456@qpidd:5672"]
       env:
         - name:  QMF_GUI_ADMIN_USERNAME
           value: admin
