@@ -19,14 +19,36 @@ spec:
           env:
             - name:  QDROUTERD_ADMIN_USERNAME
               value: admin
-            - name:  QDROUTERD_ADMIN_USERNAME
+            - name:  QDROUTERD_ADMIN_PASSWORD
               value: "123456"
             - name: QDROUTERD_CONFIG_INSET
-              value: |8
+              value: |
+                    connector {
+                      name: shard_0
+                      role: route-container
+                      host: brokers-0.qpidd
+                      port: 5672
+                      saslUsername: admin
+                      saslPassword: 123456
+                      allowRedirect: no
+                      idleTimeoutSeconds: 120
+                    }
+
                     connector {
                       name: shard_1
                       role: route-container
-                      host: brokers-0.amqp
+                      host: brokers-1.qpidd
+                      port: 5672
+                      saslUsername: admin
+                      saslPassword: 123456
+                      allowRedirect: no
+                      idleTimeoutSeconds: 120
+                    }
+
+                    connector {
+                      name: shard_2
+                      role: route-container
+                      host: brokers-2.qpidd
                       port: 5672
                       saslUsername: admin
                       saslPassword: 123456
@@ -42,6 +64,18 @@ spec:
                     autoLink {
                         addr: shardedQueue
                         dir: in
+                        connection: shard_0
+                    }
+
+                    autoLink {
+                        addr: shardedQueue
+                        dir: out
+                        connection: shard_0
+                    }
+
+                    autoLink {
+                        addr: shardedQueue
+                        dir: in
                         connection: shard_1
                     }
 
@@ -49,6 +83,18 @@ spec:
                         addr: shardedQueue
                         dir: out
                         connection: shard_1
+                    }
+
+                    autoLink {
+                        addr: shardedQueue
+                        dir: in
+                        connection: shard_2
+                    }
+
+                    autoLink {
+                        addr: shardedQueue
+                        dir: out
+                        connection: shard_2
                     }
           ports:
             - containerPort: 5672
