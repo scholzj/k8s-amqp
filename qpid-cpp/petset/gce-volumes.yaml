@@ -9,9 +9,10 @@ spec:
     storage: 1Gi
   accessModes:
     - ReadWriteOnce
-  hostPath:
-    path: /tmp/qpidd-storage-0
-  persistentVolumeReclaimPolicy: Recycle
+  gcePersistentDisk:
+      pdName: qpidd-persistency-0
+      fsType: ext3
+  persistentVolumeReclaimPolicy: Delete
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -24,9 +25,10 @@ spec:
     storage: 1Gi
   accessModes:
     - ReadWriteOnce
-  hostPath:
-    path: /tmp/qpidd-storage-1
-  persistentVolumeReclaimPolicy: Recycle
+  gcePersistentDisk:
+      pdName: qpidd-persistency-1
+      fsType: ext3
+  persistentVolumeReclaimPolicy: Delete
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -39,6 +41,7 @@ spec:
     storage: 1Gi
   accessModes:
     - ReadWriteOnce
-  hostPath:
-    path: /tmp/qpidd-storage-2
-  persistentVolumeReclaimPolicy: Recycle
+  gcePersistentDisk:
+      pdName: qpidd-persistency-2
+      fsType: ext3
+  persistentVolumeReclaimPolicy: Delete
