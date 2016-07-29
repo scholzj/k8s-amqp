@@ -6,7 +6,7 @@ metadata:
     type: local
 spec:
   capacity:
-    storage: 1Gi
+    storage: 10Gi
   accessModes:
     - ReadWriteOnce
   gcePersistentDisk:
@@ -22,7 +22,7 @@ metadata:
     type: local
 spec:
   capacity:
-    storage: 1Gi
+    storage: 10Gi
   accessModes:
     - ReadWriteOnce
   gcePersistentDisk:
@@ -38,7 +38,7 @@ metadata:
     type: local
 spec:
   capacity:
-    storage: 1Gi
+    storage: 10Gi
   accessModes:
     - ReadWriteOnce
   gcePersistentDisk:
