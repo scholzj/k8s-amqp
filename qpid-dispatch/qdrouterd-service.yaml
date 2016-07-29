@@ -7,8 +7,6 @@ metadata:
   name: qdrouterd
 spec:
   ports:
-    - port: 5672
-      name: amqp
     - port: 5671
       name: amqps
   selector:
