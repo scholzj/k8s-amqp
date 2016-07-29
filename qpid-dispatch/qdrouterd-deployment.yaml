@@ -82,6 +82,7 @@ spec:
                       port: 5672
                       saslUsername: admin
                       saslPassword: 123456
+                      saslMechanisms: PLAIN
                       allowRedirect: no
                       idleTimeoutSeconds: 120
                       linkCapacity: 1000
@@ -94,6 +95,7 @@ spec:
                       port: 5672
                       saslUsername: admin
                       saslPassword: 123456
+                      saslMechanisms: PLAIN
                       allowRedirect: no
                       idleTimeoutSeconds: 120
                       linkCapacity: 1000
@@ -106,6 +108,7 @@ spec:
                       port: 5672
                       saslUsername: admin
                       saslPassword: 123456
+                      saslMechanisms: PLAIN
                       allowRedirect: no
                       idleTimeoutSeconds: 120
                       linkCapacity: 1000
