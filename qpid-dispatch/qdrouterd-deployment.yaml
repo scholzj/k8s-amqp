@@ -148,6 +148,23 @@ spec:
                         dir: out
                         connection: shard_2
                     }
+
+                    address {
+                        prefix: singleNodeQueue
+                        waypoint: yes
+                    }
+
+                    autoLink {
+                        addr: singleNodeQueue
+                        dir: in
+                        connection: shard_0
+                    }
+
+                    autoLink {
+                        addr: singleNodeQueue
+                        dir: out
+                        connection: shard_0
+                    }
           ports:
             - containerPort: 5672
               name: amqp
