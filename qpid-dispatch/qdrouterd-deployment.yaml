@@ -84,6 +84,7 @@ spec:
                       saslPassword: 123456
                       allowRedirect: no
                       idleTimeoutSeconds: 120
+                      linkCapacity: 1000
                     }
 
                     connector {
@@ -95,6 +96,7 @@ spec:
                       saslPassword: 123456
                       allowRedirect: no
                       idleTimeoutSeconds: 120
+                      linkCapacity: 1000
                     }
 
                     connector {
@@ -106,6 +108,7 @@ spec:
                       saslPassword: 123456
                       allowRedirect: no
                       idleTimeoutSeconds: 120
+                      linkCapacity: 1000
                     }
 
                     address {
